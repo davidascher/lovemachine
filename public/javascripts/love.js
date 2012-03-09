@@ -68,15 +68,15 @@ function updateCount(count, you, url) {
   if (you) {
     if (count == 1) {
       $("#loves").html(
-        "<span class='by loved'>You're the first to <img class='love' src='/images/filledpurpleheart.png'/> this!</span>" );
+        "<span class='by loved'>You're the first to <img class='love' src='/images/megaphone-16-red.png'/> this!</span>" );
     } else {
-      $("#loves").html("<span class='by loved'><img class='love' src='/images/filledpurpleheart.png'/> by " + count + " " + person(count) + " including you!</span>" );
+      $("#loves").html("<span class='by loved'><img class='love' src='/images/megaphone-16-purple.png'/> by " + count + " " + person(count) + " including you!</span>" );
     }
   } else {
     if (count) {
-      $("#loves").html("<span class='by unloved'><img class='love' src='/images/filledpurpleheart.png'/> by " + count + " " + person(count) + ". <a onclick=loveit("+count+","+you+",'"+url+"')>you?</a></span>" );
+      $("#loves").html("<span class='by unloved'><img class='love' src='/images/megaphone-16-purple.png'/> by " + count + " " + person(count) + ". <a onclick=loveit("+count+","+you+",'"+url+"')>you?</a></span>" );
     } else {
-      $("#loves").html("<span class='by unloved'>do you <a onclick=loveit("+count+","+you+",'"+url+"')><img class='love' src='/images/heart.png'/> it?</span></a>");
+      $("#loves").html("<span class='by unloved'>do you <a onclick=loveit("+count+","+you+",'"+url+"')><img class='love' src='/images/megaphone-16.png'/> it?</span></a>");
     }
   }
 }
