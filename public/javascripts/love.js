@@ -9,12 +9,9 @@ function loadPageVar (sVar) {
 }  
 
 function loveit(count, you, url) {
-  console.log("loggedInAs", loggedInAs);
   if (loggedInAs) {
     $.post('/api/loveit/'+url, function (res) {
       updateCount(count+1, 1, url)
-      console.log('done with updatecount');
-      debugger;
     })
   } else {
     navigator.id.getVerifiedEmail(
@@ -28,7 +25,6 @@ function loveit(count, you, url) {
               if (res !== null) {
                 $.post('/api/loveit/'+url, function (res) {
                   updateCount(count+1, 1, url)
-                  console.log('done with updatecount');
                   debugger;
                 })
               }
@@ -69,7 +65,6 @@ function person(count) {
 }
 
 function updateCount(count, you, url) {
-  console.log("count", count, "url", url, "you", you);
   if (you) {
     if (count == 1) {
       $("#loves").html(
@@ -91,7 +86,6 @@ function browserIdCheck() {
   var url = loadPageVar('url');
   $.get('/api/wholoves/'+url, function (res) {
     loggedInAs = res.email;
-    console.log(res.email);
     updateCount(res.loves, res.you, url);
     // if (res.email === null) loggedOut(res);
     // else loggedIn(res, true);

@@ -12,8 +12,16 @@ https = require('https'),
 querystring = require('querystring'),
 url = require('url');
 less = require('less');
+
+
+console.log("VCAP_SERVICES=", process.env.VCAP_SERVICES);
+
+redisConfig = JSON.parse(process.env.VCAP_SERVICES)['redis-2.2'][0].credentials;
+redis_host = redisConfig.host;
+redis_port = redisConfig.port;
 var redis = require("redis"),
-db = redis.createClient();
+db = redis.createClient(redis_port, redis_host);
+db.auth(redisConfig.password);
 var RedisStore = require('connect-redis')(express);
 
 var app = module.exports = express.createServer();
@@ -33,8 +41,10 @@ app.configure('production', function(){
 // the key with which session cookies are encrypted
 const COOKIE_SECRET = process.env.SEKRET || 'love conquers like';
 
+console.log(process.env);
+
 // The IP Address to listen on.
-const IP_ADDRESS = process.env.VCAP_HOST || '127.0.0.1';
+const IP_ADDRESS = process.env.VCAP_APP_HOST || '127.0.0.1';
 
 // The port to listen to.
 const PORT = process.env.VCAP_APP_PORT || 8003;

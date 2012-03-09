@@ -1,0 +1,16 @@
+--- 
+applications: 
+  .: 
+    name: love
+    instances: 1
+    framework: 
+      name: node
+      info: 
+        exec: 
+        description: Node.js Application
+        mem: 64M
+    url: ${name}.${target-base}
+    services: 
+      redis-743c5: 
+        type: :redis
+    mem: 64M

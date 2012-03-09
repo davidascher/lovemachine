@@ -1,11 +1,11 @@
 body {
-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 13px;
-font-weight: normal;
-line-height: 18px;
-color: #404040;
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
 }
-
 
 #you, #picture {
   display: inline;
@@ -40,7 +40,7 @@ body, #container {
   text-decoration: underline;
 }
 
-.by:hover {
+.unloved:hover {
   color: rgb(0, 136, 204);
 }
 .hidden {
