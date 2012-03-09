@@ -12,16 +12,21 @@ https = require('https'),
 querystring = require('querystring'),
 url = require('url');
 less = require('less');
+var redis = require("redis");
 
 
-console.log("VCAP_SERVICES=", process.env.VCAP_SERVICES);
 
-redisConfig = JSON.parse(process.env.VCAP_SERVICES)['redis-2.2'][0].credentials;
-redis_host = redisConfig.host;
-redis_port = redisConfig.port;
-var redis = require("redis"),
-db = redis.createClient(redis_port, redis_host);
-db.auth(redisConfig.password);
+if (process.env.VCAP_SERVICES) {
+  console.log("VCAP_SERVICES=", process.env.VCAP_SERVICES);
+  redisConfig = JSON.parse(process.env.VCAP_SERVICES)['redis-2.2'][0].credentials;
+  redis_host = redisConfig.host;
+  redis_port = redisConfig.port;
+  db = redis.createClient(redis_port, redis_host);
+  db.auth(redisConfig.password);
+} else {
+  db = redis.createClient();
+}
+
 var RedisStore = require('connect-redis')(express);
 
 var app = module.exports = express.createServer();
@@ -40,8 +45,6 @@ app.configure('production', function(){
 
 // the key with which session cookies are encrypted
 const COOKIE_SECRET = process.env.SEKRET || 'love conquers like';
-
-console.log(process.env);
 
 // The IP Address to listen on.
 const IP_ADDRESS = process.env.VCAP_APP_HOST || '127.0.0.1';
@@ -110,7 +113,6 @@ function determineEnvironment(req) {
 
 function determineBrowserIDURL(req) {
   // first defer to the environment
-  console.log('determineEnvironment = ' + determineEnvironment(req));
   if (process.env.BROWSERID_URL) return process.env.BROWSERID_URL;
 
   return ({

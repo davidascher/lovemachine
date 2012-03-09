@@ -33,6 +33,7 @@ body, #container {
 
 .by {
   vertical-align: baseline;
+  cursor: pointer;
   margin-top: 10px;
 }
 
